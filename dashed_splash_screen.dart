@@ -49,6 +49,16 @@ class _SplashScreenState extends State<SplashScreen>
 
   @override
   Widget build(BuildContext context) {
+    //to do this effect we have to make 100 copy of our logo
+    // every copy will be cliped to just render a peice of image
+    // so it will lock like you cut image to 100 peice
+    // we are butting them on stack so they will complete each other
+    // to do this we used inhirted loop 10×10
+    // the top and left are the offset of clipper for each peice
+    // the peice width will be 0.1 of image width
+    // the peice height will be 0.1 of image height
+    // try to cut a birthday cake to understand this point
+
     return Material(
       color: Colors.white,
       child: Stack(
@@ -62,6 +72,24 @@ class _SplashScreenState extends State<SplashScreen>
   }
 
   Widget buildLogoPart(double top, double left) {
+    //we have the real offset but we need to scatter pieces on the screen
+    // so we will get arandom offset on the screen and make
+    // this offset far enuogh from center _top & _left
+    // top & left is for clipping 
+    // _top & _left is for translating 
+    // to make it more fancy we rotated this peices and start with random angle
+    // now we have 2 animations 
+    // first is for scaling and will start from 0 to 0.25
+    // second is for translate and rotate and this one is from 1 to 0
+    // search for curved animation if you need more info
+    // to understand more
+    // this method will render a full screen transparent box
+    // in its center you will find a peice of image
+    // the box begin may be at x:-1000,y:-1000 angle:45 scale:0
+    // when the animation start the scale increasing to 1
+    // then x&y&angle decreasing to 0
+
+
     var w = MediaQuery.of(context).size.width;
     var h = MediaQuery.of(context).size.height;
     var angle = rnd.nextInt(10);
